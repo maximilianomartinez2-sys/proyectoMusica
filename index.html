@@ -1,39 +1,52 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App de música - Inicio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="layout-container">
-        <nav class="sidebar">
-            <div class="logo">
-                <h2>App de música</h2>
-            </div>
-            <ul>
-                <li><a href="index.html" class="active">Inicio</a></li>
-                <li><a href="search.html">Buscar</a></li>
-                <li><a href="playlist.html">Biblioteca</a></li>
-            </ul>
-        </nav>
-        <main class="main">
-            <header class="top-bar">
-                <h1>Canciones para ti</h1>
-            </header>
-            <section class="music-grid">
-                <article class="card">
-                    <img src="https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg" alt="Bohemian Rhapsody - Queen">
-                    <h3>Bohemian Rhapsody</h3>
-                    <p class="artist">Queen</p>
-                    <p class="release-date">Lanzamiento: 31/10/1975</p>
+    <header>
+        <article class="Encabezado">
+        <form class="SearchBar">
+                    <input type="text" name="Search" id="Search" placeholder="Buscar...">
+                </form>
+                <button class="ProfileButton">Mi Perfil</button> 
                 </article>
-            </section>
-        </main>
+                <article class="buttons">
+                    <a class="Startbutton" href="Inicio.html">Inicio</a>
+                    <a class="Explorebutton" href="Explorar.html">Explorar</a>
+                    <a class="Playlistbutton" href="Playlist.html">Playlist</a>
+                </article>
+    </header>
+    <main> 
+        <div class="Musics">
+         <div class="Music">
+            <button class="PlayButton">&#9658</button>
+            <div class="MusicIcon"></div>
+            <div class="MusicBar"></div>
+            <span class="MusicTime">3:38</span>
+         </div>
+         <div class="Music">
+            <button class="PlayButton">&#9658</button>
+            <div class="MusicIcon"></div>
+            <div class="MusicBar"></div>
+            <span class="MusicTime">4:05</span>
+         </div>
+         <div class="Music">
+            <button class="PlayButton">&#9658</button>
+            <div class="MusicIcon"></div>
+            <div class="MusicBar"></div>
+            <span class="MusicTime">1:57</span>
+         </div>
     </div>
-    <footer class="player">
-        <p>Reproduciendo: Bohemian Rhapsody - Queen</p>
-    </footer>
+
+    <div class="PlayerControls">
+        <button class="ControlButton">&#x23EE</button>
+        <button class="ControlButton PlayMain">&#9658</button>
+        <button class="ControlButton">&#x23ED</button>
+    </div>
+    </main>
 </body>
 </html>
