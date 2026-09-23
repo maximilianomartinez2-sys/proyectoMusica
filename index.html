@@ -3,9 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>App de música - Inicio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="layout-container">
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>App de música</h2>
+            </div>
+            <ul>
+                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="search.html">Buscar</a></li>
+                <li><a href="playlist.html">Biblioteca</a></li>
+            </ul>
+        </nav>
+        <main class="main">
+            <header class="top-bar">
+                <h1>Canciones para ti</h1>
+            </header>
+            <section class="music-grid">
+                <article class="card">
+                    <img src="https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg" alt="Bohemian Rhapsody - Queen">
+                    <h3>Bohemian Rhapsody</h3>
+                    <p class="artist">Queen</p>
+                    <p class="release-date">Lanzamiento: 31/10/1975</p>
+                </article>
+            </section>
+        </main>
+    </div>
+    <footer class="player">
+        <p>Reproduciendo: Bohemian Rhapsody - Queen</p>
+    </footer>
 </body>
 </html>
