@@ -1,60 +1,82 @@
+body{
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 .Encabezado{
     display: flex;
     align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 30px 20px;
 }
 .ProfileButton{
     position: absolute;
-    right: 10px;
-    margin-top: 10px;
+    right: 40px;
     background-color: red;
     color: white;
     border: none;
-    padding: 10px 20px;
+    border-radius: 10px;
+    padding: 15px 30px;
+    font-size: 20px;
     cursor: pointer;
+    font-weight: bold;
 }
 .SearchBar{
     display: flex;
     align-items: center;
-    margin: 10px auto 0;
-    padding: 5px;
-    width: 400px;
-    border: 1px solid black;
-    border-radius: 10px;
+    background-color: white;
+    padding: 8px 15px;
+    width: 600px;
+    border-radius: 25px;
 }
 #Search{
     width: 450px;
     height: 40px;
-    font-size: 16px;
-    padding: 0 12px;
+    font-size: 20px;
     border: none;
+    outline: none;
+    color: black;
 }
 .Startbutton{
     background-color: red;
     color: white;
     border: none;
-    padding: 20px 60px;
+    border-radius: 10px;
+    padding: 20px 45px;
     cursor: pointer;
     Font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
 }
 .Explorebutton{
     background-color: red;
     color: white;
     border: none;
-    padding: 20px 60px;
+    border-radius: 10px;
+    padding: 20px 45px;
     cursor: pointer;
     Font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
 }
 .Playlistbutton{
     background-color: red;
     color: white;
     border: none;
-    padding: 20px 60px;
+    border-radius: 10px;
+    padding: 20px 45px;
     cursor: pointer;
     Font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
 }
 .buttons{
-    gap: 40px;
-    margin-top: 30px;
+    gap: 30px;
+    margin-top: 60px;
+    margin-bottom: 60px;
     display: flex;
     justify-content: center;
 }
@@ -67,56 +89,66 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin: 10px 0 0 40px; 
+    margin: 0 auto;
     width: 600px;
 }
-
 .Music{
     display: flex;
     align-items: center;
     gap: 15px;
-    border: 1px solid black;
+    background-color: grey;
     border-radius: 10px;
-    padding: 10px 20px;
+    padding: 15px 20px;
 }
-
 .PlayButton{
     background: none;
     border: none;
     font-size: 20px;
     cursor: pointer;
+    color: white;
 }
-
 .MusicIcon{
-    width: 30px;
-    height: 30px;
-    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+    background-color: grey;
+    border-radius: 5px;
 }
 .MusicBar{
     flex: 1;
-    height: 2px;
-    background-color: #ccc;
+    height: 4px;
+    background-color: grey;
+    border-radius: 2px;
 }
-
 .MusicTime{
-    font-size: 14px;
+    font-size: 15px;
+    color: grey;
 }
-
 .PlayerControls{
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
-    margin: 40px 0 0 40px;
+    gap: 30px;
+    margin-top: 300px;
+    padding-bottom: 30px;
 }
-
 .ControlButton{
     background: none;
     border: none;
     font-size: 24px;
     cursor: pointer;
+    color: white;
 }
-
 .PlayMain{
-    font-size: 34px;
+    background-color: grey;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    margin: 0 10px;
+}
+.PlayMain:hover{
+    background-color: grey;
 }
