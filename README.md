@@ -15,4 +15,7 @@ Y por último también tiene una barra de navegación para poder escoger entre e
 ---Playlist----
 Es el espacio en el que el usuario puede ver las canciones que ha escuchado recientemente, también se pueden ver las canciones disponibles.
 
+--Explorar---
+Es el espacion en el que el usario puede escoger su tipo de música favorito entre las opciones disponibles.
+
 
