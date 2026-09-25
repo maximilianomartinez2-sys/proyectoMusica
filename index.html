@@ -1,52 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Proyecto Música</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <article class="Encabezado">
-        <form class="SearchBar">
-                    <input type="text" name="Search" id="Search" placeholder="Buscar...">
-                </form>
-                <button class="ProfileButton">Mi Perfil</button> 
-                </article>
-                <nav class="buttons">
-                    <a class="Startbutton" href="index.html">Inicio</a>
-                    <a class="Explorebutton" href="explorar.html">Explorar</a>
-                    <a class="Playlistbutton" href="playlist.html">Playlist</a>
-                </nav>
+    <header class="Encabezado">
+        <div class="SearchBar">
+            <input type="text" id="Search" placeholder="Buscar...">
+        </div>
+        <button class="ProfileButton">Mi Perfil</button>
     </header>
-    <main> 
-        <section class="Musics">
-         <article class="Music">
+    <nav class="buttons">
+        <a href="index.html" class="Startbutton">Inicio</a>
+        <a href="explorar.html" class="Explorebutton">Explorar</a>
+        <a href="playlist.html" class="Playlistbutton">Playlist</a>
+    </nav>
+    <main class="ContenedorPrincipal">
+    <div class="Musics">
+        <h2 class="RecientesTitulo">Agregadas recientemente</h2>
+        <div class="Music">
             <button class="PlayButton">&#9658</button>
             <div class="MusicIcon"></div>
             <div class="MusicBar"></div>
             <span class="MusicTime">3:38</span>
-         </article>
-         <article class="Music">
+        </div>
+        <div class="Music">
             <button class="PlayButton">&#9658</button>
             <div class="MusicIcon"></div>
             <div class="MusicBar"></div>
             <span class="MusicTime">4:05</span>
-         </article>
-         <article class="Music">
+        </div>
+        <div class="Music">
             <button class="PlayButton">&#9658</button>
             <div class="MusicIcon"></div>
             <div class="MusicBar"></div>
             <span class="MusicTime">1:57</span>
-         </article>
-        </section>
-    </main>
-
-    <footer class="PlayerControls">
+        </div>
+    </div>
+    
+    <aside class="PanelDerecho">
+        <div class="PortadaGrande">
+            <img src="https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg" alt="Portada de la canción">
+        </div>
+        <div class="InfoCancionGrande">
+            <h2>Bohemian Rhapsody</h2>
+            <p>Queen</p>
+        </div>
+    </aside>
+</main>
+    <div class="PlayerControls">
         <button class="ControlButton">&#x23EE</button>
         <button class="ControlButton PlayMain">&#9658</button>
         <button class="ControlButton">&#x23ED</button>
-    </footer>
+        
+        <div class="VolumeControl">
+            <button class="VolumeButton">🔊</button>
+            <input type="range" min="0" max="100" value="50" class="VolumeSlider">
+        </div>
+    </div>
 </body>
 </html>

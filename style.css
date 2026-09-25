@@ -1,20 +1,19 @@
-body{
+body {
     background-color: black;
     color: white;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
 }
-.Encabezado{
+.Encabezado {
     display: flex;
     align-items: center;
-    justify-content: center;
     position: relative;
-    padding: 30px 20px;
+    padding: 10px;
 }
-.ProfileButton{
+.ProfileButton {
     position: absolute;
-    right: 40px;
+    right: 20px;
+    top: 15px;
     background-color: red;
     color: white;
     border: none;
@@ -24,131 +23,182 @@ body{
     cursor: pointer;
     font-weight: bold;
 }
-.SearchBar{
+.SearchBar {
     display: flex;
     align-items: center;
+    margin: 15px auto 0;
+    padding: 4px 10px;
+    width: 400px;
     background-color: white;
-    padding: 8px 15px;
-    width: 600px;
-    border-radius: 25px;
+    border: 1px solid grey;
+    border-radius: 10px;
 }
-#Search{
-    width: 450px;
-    height: 40px;
+#Search {
+    width: 100%;
+    height: 35px;
     font-size: 20px;
+    padding: 0 10px;
     border: none;
     outline: none;
     color: black;
+}
+.buttons {
+    gap: 30px;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
 }
 .Startbutton{
     background-color: red;
     color: white;
     border: none;
-    border-radius: 10px;
-    padding: 20px 45px;
+    padding: 15px 40px;
     cursor: pointer;
-    Font-size: 20px;
+    font-size: 20px;
     font-weight: bold;
-    text-decoration: none;
 }
 .Explorebutton{
     background-color: red;
     color: white;
     border: none;
-    border-radius: 10px;
-    padding: 20px 45px;
+    padding: 15px 40px;
     cursor: pointer;
-    Font-size: 20px;
+    font-size: 20px;
     font-weight: bold;
-    text-decoration: none;
 }
-.Playlistbutton{
+.Playlistbutton {
     background-color: red;
     color: white;
     border: none;
-    border-radius: 10px;
-    padding: 20px 45px;
+    padding: 15px 40px;
     cursor: pointer;
-    Font-size: 20px;
+    font-size: 20px;
     font-weight: bold;
-    text-decoration: none;
 }
-.buttons{
-    gap: 30px;
-    margin-top: 60px;
-    margin-bottom: 60px;
-    display: flex;
-    justify-content: center;
+.RecientesTitulo {
+    text-align: center;
+    margin: 30px 0 15px 0;
+    color: white;
 }
-.RecientesTitulo{
-    margin: 30px 0 10px 40px;
-    text-align: left;
-}
-
-.Musics{
+.Musics {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin: 0 auto;
+    margin: 0;
     width: 600px;
 }
-.Music{
+.Music {
     display: flex;
     align-items: center;
     gap: 15px;
-    background-color: grey;
+    border: 1px solid white;
     border-radius: 10px;
-    padding: 15px 20px;
+    padding: 10px 20px;
+    color: white;
 }
-.PlayButton{
+.PlayButton {
     background: none;
     border: none;
     font-size: 20px;
     cursor: pointer;
     color: white;
 }
-.MusicIcon{
-    width: 40px;
-    height: 40px;
-    background-color: grey;
-    border-radius: 5px;
+.MusicIcon {
+    width: 30px;
+    height: 30px;
+    border: 1px solid white;
 }
-.MusicBar{
+.MusicBar {
     flex: 1;
-    height: 4px;
+    height: 2px;
     background-color: grey;
-    border-radius: 2px;
 }
-.MusicTime{
+.MusicTime {
     font-size: 15px;
-    color: grey;
+    color: white;
 }
-.PlayerControls{
+.PlayerControls {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
-    margin-top: 300px;
-    padding-bottom: 30px;
+    gap: 25px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    background-color: black;
 }
-.ControlButton{
+.VolumeControl {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    right: 40px;
+}
+.VolumeButton {
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
     color: white;
 }
-.PlayMain{
+.VolumeSlider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 5px;
+    background: grey;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+.ControlButton {
     background-color: grey;
-    width: 80px;
-    height: 80px;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    color: white;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 40px;
-    margin: 0 10px;
 }
-.PlayMain:hover{
-    background-color: grey;
+.ControlButton:hover {
+    background-color: grey; 
+}
+.PlayMain {
+    font-size: 40px; 
+    width: 80px;
+    height: 80px;
+}
+.ContenedorPrincipal {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    margin-top: 30px;
+    margin-bottom: 120px;
+}
+.PanelDerecho {
+    width: 320px;
+    background-color: black;
+    border-radius: 10px;
+    color: white;
+    padding: 15px;
+}
+.PortadaGrande img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.InfoCancionGrande {
+    margin-top: 20px;
+}
+.InfoCancionGrande h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #b3b3b3;
 }
