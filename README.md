@@ -1,21 +1,10 @@
-# proyectoMusica
-Pagina de música
+### Nombre del proyecto: <MusicU>
+### Integrantes: Maximiliano Martínez, Martín Castro, Benjamín Rosales
 
----Iniciar sesión----
-Iniciar sesión consiste en un espacio para introducir el correo electrónico, y otro espacio para introducir la contraseña del
-correo, en el caso de que no tenga una cuenta creada previamente, deberá pinchar el "Registrarse" para poder crear una cuenta.
+La página básicamente es en una aplicación que recopila canciones, muestra las canciones escuchadas recientemente por el usuario y permite navegar para escuchar diferentes generos de música.
+El proyecto se pudo llevar a cabo utilizando html, CSS y javascript
 
----Registrarse-----
-Se ingresa un nombre de usuario para la plataforma, además de su correo electrónico y la contraseña de este, finalmente se pulsa el botón para crear la cuenta.
-
----Inicio (index.html)-----
-Es la pantalla protagonista de la aplicación de música y en ella se muestra la sección de canciones agregadas recientemente, también hay un panel al costado con información importante, en este caso canciones famosas de Queen. 
-Y por último también tiene una barra de navegación para poder escoger entre el inicio, ir a explorar o la playlist.
-
----Playlist----
-Es el espacio en el que el usuario puede ver las canciones que ha escuchado recientemente, también se pueden ver las canciones disponibles.
-
---Explorar---
-Es el espacion en el que el usario puede escoger su tipo de música favorito entre las opciones disponibles.
-
-
+Para poder acceder a la página con el dispositivo local es necesario instalar aplicaciones
+Git para poder copiar el repositorio
+Una aplicación que permita editar el código (por ejemplo Visual Studio Code).
+Un navegador de web (por ejemplo FireFox)
