@@ -202,3 +202,35 @@ body {
     font-size: 20px;
     color: #b3b3b3;
 }
+#formLogin button:hover{
+    background-color: darkred;
+}
+#formLogin button:disabled{
+    background-color: grey;
+    cursor: not-allowed;
+}
+.LoginMain a{
+    color: red;
+}
+#mensajeLogin{
+    margin-top: 15px;
+}
+.buttons .Startbutton{
+    text-decoration: none;
+}
+.LoginMain{
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 20px;
+    text-align: center;
+}
+.LoginMain h1{
+    color: white;
+    margin-bottom: 30px;
+}
+#formLogin{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
