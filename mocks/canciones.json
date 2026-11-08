@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "titulo": "Bohemian Rhapsody",
+        "artista": "Queen",
+        "genero": "Rock",
+        "duracionSegundos": 218,
+        "duracionTexto": "3:38"
+    },
+    {
+        "id": 2,
+        "titulo": "Here Comes The Sun",
+        "artista": "The Beatles",
+        "genero": "Rock",
+        "duracionSegundos": 185,
+        "duracionTexto": "3:05"
+    },
+    {
+        "id": 3,
+        "titulo": "I Want You Back",
+        "artista": "The Jackson 5",
+        "genero": "Soul",
+        "duracionSegundos": 179,
+        "duracionTexto": "2:59"
+    },
+    {
+       "id": 4,
+        "titulo": "Come and Get Your Love",
+        "artista": "Redbone",
+        "genero": "Funk",
+        "duracionSegundos": 205,
+        "duracionTexto": "3:25" 
+    },
+    {
+        "id": 5,
+        "titulo": "Mr. Blue Sky",
+        "artista": "Electric Light Orchestra",
+        "genero": "Rock",
+        "duracionSegundos": 303,
+        "duracionTexto": "5:03"
+    },
+    {
+        "id": 6,
+        "titulo": "Don't Stop Me Now",
+        "artista": "Queen",
+        "genero": "Rock",
+        "duracionSegundos": 209,
+        "duracionTexto": "3:29"
+    },
+    {
+        "id": 7,
+        "titulo": "Come Together",
+        "artista": "The Beatles",
+        "genero": "Rock",
+        "duracionSegundos": 259,
+        "duracionTexto": "4:19"
+    },
+    {
+        "id": 8,
+        "titulo": "Magia",
+        "artista": "Gustavo Cerati",
+        "genero": "Rock",
+        "duracionSegundos": 268,
+        "duracionTexto": "4:28"
+    },
+    {
+        "id": 9,
+        "titulo": "Continentales",
+        "artista": "Macha y el Bloque Depresivo",
+        "genero": "Bolero",
+        "duracionSegundos": 166,
+        "duracionTexto": "2:46"
+    },
+    {
+        "id": 10,
+        "titulo": "Demoliendo Hoteles",
+        "artista": "Charly García",
+        "genero": "Rock",
+        "duracionSegundos": 135,
+        "duracionTexto": "2:15"
+    }
+]
