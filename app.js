@@ -1,22 +1,24 @@
 const canciones = [
     {
         id: 1,
-        titulo: "Cancion 1",
-        artista: "Artista 1",
-        duracion: "3:30"
+        titulo: "Bohemian Rhapsody",
+        artista: "Queen",
+        duracionTexto: "3:38",
+        duracionSegundos: 218
     },
     {
         id: 2,
         titulo: "Cancion 2",
         artista: "Artista 2",
-        duracion: "4:15"
+        duracionTexto: "4:15",
+        duracionSegundos: 255
     }
 ];
-let playlist = JSON.parse(localStorage.getItem("misPlaylist")) || [{nombre: "Favoritas", canciones: []}];
-let colaReproduccion=[];
+//let playlist = JSON.parse(localStorage.getItem("misPlaylist")) || [{nombre: "Favoritas", canciones: []}];
+//let colaReproduccion=[];
 let cancionActual = 0;
-let reproducir = false;
-let tiempoTranscurrido = 0;
+let reproduciendo = false;
+let segundosTranscurrido = 0;
 let temporizador=null;
 const formulario=document.getElementById("formLogin");
 if(formulario){
@@ -32,19 +34,32 @@ if(formulario){
         }
     });
 }
-const playMainBtn=document.querySelector(".PlayMain");
-const musicBar=document.querySelector(".MusicBar");
-const  musicTimeLabel=document.querySelector(".MusicTime");
-const prevBtn=document.querySelector(".PlayerControls button:first-child");
-const nextBtn=document.querySelector(".PlayerControls button:last-child");
+const playMainBtn=document.querySelector(".PlayerControls .PlayMain");
+const musicBarProgress=document.querySelector(".PlayerControls .MusicBarProgress");
+const  musicTimeLabel=document.querySelector(".PlayerControls .MusicTime");
+const prevBtn=document.querySelector(".PlayerControls .BtnPrev");
+const nextBtn=document.querySelector(".PlayerControls .BtnNext");
+function actualizarBarra(){
+    const cancion=canciones[cancionActual];
+    const porcentaje=(segundosTranscurrido/cancion.duracionSegundos)*100;
+    if(musicBarProgress){
+        musicBarProgress.style.width=`${porcentaje}%`;
+    }
+    const minutos=Math.floor(segundosTranscurrido/60);
+    const segundos=segundosTranscurrido%60;
+    const tiempoFormateado= segundos<10? `0${segundos}`: segundos;
+    if(musicTimeLabel){
+        musicTimeLabel.textContent=`${minutos}:${tiempoFormateado} / ${cancion.duracionTexto}`;
+    }
+}
 function reproducirCancion(){
-    reproducir=true;
-    if(playMainBtn) playMainBtn.textContent="Pausa";
-    if(temporizador){
+    reproduciendo=true;
+    if(playMainBtn) playMainBtn.textContent="⏸";
+    if(!temporizador){
         temporizador=setInterval(()=>{
             const cancion=canciones[cancionActual];
-        if(tiempoTranscurrido<cancion.segundos){
-            tiempoTranscurrido++;
+        if(segundosTranscurrido<cancion.duracionSegundos){
+            segundosTranscurrido++;
             actualizarBarra(cancion);
         }else{
             siguienteCancion();
@@ -53,45 +68,39 @@ function reproducirCancion(){
 }
 }   
 function pausarCancion(){
-    reproducir=false;
-    if(playMainBtn) playMainBtn.textContent='&#9658;';
+    reproduciendo=false;
+    if(playMainBtn) playMainBtn.innerHTML='&#9658;';
     clearInterval(temporizador);
     temporizador=null;
 }
 function toggleReproduccion(){
-    if(reproducir){
+    if(reproduciendo){
         pausarCancion();
     }else{
         reproducirCancion();
     }
 }
-function actualizarBarra(cancion){
-    const porcentaje=(tiempoTranscurrido/cancion.segundos)*100;
-    if(musicBar){
-        musicBar.style.background=`linear-gradient(to right, #1db954 ${porcentaje}%, #404040 ${porcentaje}%)`;
-    }
-    const mins=Math.floor(tiempoTranscurrido/60);
-    const segs=tiempoTranscurrido%60;
-    const segsFormateados=segs<10?`0${segs}`:segs;
-    if(musicTimeLabel){
-        musicTimeLabel.textContent=`${mins}:${segsFormateados}/${cancion.duracion}`;
-    }
-}
 function siguienteCancion(){
-    tiempoTranscurrido=0;
-    if(colaReproduccion.length>0){
-        const proxima=colaReproduccion.shift();
-        alert('Reproduciendo desde cola: ${proxima.titulo}');
-    }else{
-        cancionActual=(cancionActual+1)%canciones.length;
-    }
-    reproducirCancion();
+    segundosTranscurrido=0;
+    cancionActual=(cancionActual+1)%canciones.length;
+    actualizarBarra();
+    if(reproduciendo) reproducirCancion();
 }
 function anteriorCancion(){
-    tiempoTranscurrido=0;
+    segundosTranscurrido=0;
     cancionActual=(cancionActual-1+canciones.length)%canciones.length;
-    reproducir
+    actualizarBarra();
+    if(reproduciendo) reproducirCancion();
 }
 if(playMainBtn) playMainBtn.addEventListener("click", toggleReproduccion);
 if(prevBtn) prevBtn.addEventListener("click", anteriorCancion);
 if(nextBtn) nextBtn.addEventListener("click", siguienteCancion);
+const botonesLista=document.querySelectorAll('.Musics .PlayButton');
+botonesLista.forEach((boton, index)=>{
+    boton.addEventListener("click", ()=>{
+        cancionActual=index;
+        segundosTranscurrido=0;
+        actualizarBarra();
+        reproducirCancion();
+    });
+});
