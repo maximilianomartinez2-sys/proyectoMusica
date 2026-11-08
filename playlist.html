@@ -47,10 +47,18 @@
         </section>
     </main>
     <footer class="PlayerControls">
-        <button class="ControlButton">&#x23EE</button>
-        <button class="ControlButton PlayMain">&#9658</button>
-        <button class="ControlButton">&#x23ED</button>
-
-    </footer>
+            <div class="ControlButtons">
+                <button class="ControlButton BtnPrev">&#x23EE</button>
+                <button class="ControlButton PlayMain">&#9658</button>
+                <button class="ControlButton BtnNext">&#x23ED</button>
+            </div>
+            <div class="ProgressBarContainer">
+                <div class="MusicBar">
+                    <div class="MusicBarProgress"></div>
+                </div>
+                <span class="MusicTime">0:00</span>
+            </div>    
+        </footer>
+        <script src="app.js" defer></script>
 </body>
 </html>
