@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "nombre": "Temas favoritos",
+    "usuarioId": 1,
+    "cancionIds": [2, 3, 4]
+  },
+  {
+    "id": 2,
+    "nombre": "Para escuchar después",
+    "usuarioId": 1,
+    "cancionIds": []
+  }
+]
