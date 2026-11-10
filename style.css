@@ -1,3 +1,4 @@
+@import "tailwindcss";
 *{
     box-sizing: border-box;
     margin: 0;
@@ -304,3 +305,4 @@ body {
     gap: 15px;
     text-align: left;
 }
+[x-cloak] { display: none !important; }

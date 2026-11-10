@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script type="module" src="app.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto Música</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="bg-zinc-900 text-white min-h-screen" x-data="musicApp">
     <header class="Encabezado">
         <div class="SearchBar">
-            <input type="text" id="Search" placeholder="Buscar...">
+            <input type="text" id="Search" x-model="busqueda placeholder"="Buscar...">
         </div>
         <a href="registrar.html" class="ProfileButton">Iniciar sesión</a>
     </header>
@@ -21,49 +22,69 @@
     <main class="ContenedorPrincipal">
     <div class="Musics">
         <h2 class="RecientesTitulo">Agregadas recientemente</h2>
-        <div class="Music">
-            <button class="PlayButton">&#9658</button>
-            <div class="MusicIcon"></div>
-            <div class="MusicBar"></div>
-            <span class="MusicTime">3:38</span>
-        </div>
-        <div class="Music">
-            <button class="PlayButton">&#9658</button>
-            <div class="MusicIcon"></div>
-            <div class="MusicBar"></div>
-            <span class="MusicTime">4:05</span>
-        </div>
-        <div class="Music">
-            <button class="PlayButton">&#9658</button>
-            <div class="MusicIcon"></div>
-            <div class="MusicBar"></div>
-            <span class="MusicTime">1:57</span>
-        </div>
-    </div>
-    
+        <template x-for="cancion in cancionesFiltradas" :key="cancion.id">
+            <div class="Music flex item-center justify-between p-2 rounded hover:bg-zinc-800/80 transition">
+                <div class=""flex items-center gap-3>
+                    <button class="PlayButton" @click="reproducir(cancion)">
+                        <span  x-text="reproduciendo && cancionActual?.id === cancion.id? '❚❚' : '►'"></span>
+                    </button>
+                    <div>
+                        <h4 class="font-semibold text-white text-sm" x-text="cancion.titulo"></h4>
+                        <p class="text-xs text-zinc-400" x-text="`${cancion.artista} • ${cancion.genero}`"></p>
+                    </div>     
+            </div>
+            <div class="flex items- center gap-3">
+                <span class="MusicTime text-xs text-zinc-400" x-text="cancion.duracionTexto"></span>
+                <button @click="toggleFavorito(cancion)"title="Agregar a favoritos">
+                    <span x-text="esFavorito(cancion.id)?'❤️' : '🤍'"></span>
+                </button>
+                <div class="relative">
+                    <button @click.stop="menuAbiertoID=(menuAbiertoID===cancion.id?null: cancion.id)" class="px-2 font-bold text-zinc-400 hover:text-white">
+                        •••
+                    </button>
+                    <div x-show="menuAbiertoID===cancion.id" @click.outside="menuAbiertoID=null" x-transition class="absolute right-0 mt-2 w-44 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl z-20 py-1 text-sm">
+                        <button @click="agregarACola(cancion)" class="w-full text-left px-4 py-2 hover:bg-zinc-700">Agregar a la cola</button>
+                        <button @click="verDetalle(cancion)" class="w-full text-left px-4 py-2 hover:bg-zinc-700">Ver detalles</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </template>
+    </div>                    
     <aside class="PanelDerecho">
         <div class="PortadaGrande">
             <img src="https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg" alt="Portada de la canción">
         </div>
         <div class="InfoCancionGrande">
-            <h2>Bohemian Rhapsody</h2>
-            <p>Queen</p>
+            <h2 x-text="cancionActual ? cancionActual.titulo : 'Selecciona una canción'" ></h2>
+            <p x-text="cancionActual ? cancionActual.artista : ''"></p>
         </div>
     </aside>
 </main>
     <footer class="PlayerControls">
             <div class="ControlButtons">
-                <button class="ControlButton BtnPrev">&#x23EE</button>
-                <button class="ControlButton PlayMain">&#9658</button>
-                <button class="ControlButton BtnNext">&#x23ED</button>
+                <button class="ControlButton BtnPrev" @click="anterior()">&#x23EE</button>
+                <button class="ControlButton PlayMain" @click="togglePlay()">
+                    <span x-text="reproduciendo ? '❚❚' : '►'"></span>
+                </button>
+                <button class="ControlButton BtnNext" @click="siguiente()">&#x23ED</button>
             </div>
             <div class="ProgressBarContainer">
                 <div class="MusicBar">
-                    <div class="MusicBarProgress"></div>
+                    <div class="MusicBarProgress" :style="`width: ${porcentajeProgreso}%`"></div>
                 </div>
-                <span class="MusicTime">0:00</span>
+                <span class="MusicTime" x-text="`${tiempoFormateadoActual} / ${cancionActual ? cancionActual.duracionTexto : '0:00'}`"></span>
             </div>    
         </footer>
-        <script src="app.js" defer></script>
+        <div x show="notificacion.mostrar" x-transition class="fixed bottom-20 right-6 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg font-medium text-sm z-50" x-text="notificacion.mensaje"></div>
+        <div x-show="modalDetalle" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" x-transition>
+            <div class="bg-zinc-800 border border-zinc-700 p-6 rounded-xl max-w-sm w-full relative" @click.outside="modalDetalle = false">
+                <h3 class="text-xl font-bold text-white mb-2" x-text="cancionModal?.titulo"></h3>
+                <p class="text-sm text-zinc-300 mb-1"><strong>Artista:</strong><span x-text="cancionModal?.artista"></span></p> 
+                <p class="text-sm text-zinc-300 mb-1"><strong>Género:</strong><span x-text="cancionModal?.genero"></span></p> 
+                <p class="text-sm text-zinc-300 mb-1"><strong>Duración:</strong><span x-text="cancionModal?.duracionTexto"></span></p>
+                <button @click="modalDetalle = false" class="mt-6 bg-zinc-700 hover:bg-zinc-600 text-white font-medium px-4 py-2 rounded-lg text-sm w-full">Cerrar</button>
+            </div>             
+        </div>
 </body>
 </html>
