@@ -83,3 +83,49 @@ export async function obtenerPlaylists(forzarError=false){
         };
     }
 }
+export async function crearPlaylist(nombre, usuarioId, forzarError=false){
+    try{
+        const respuesta=await obtenerPlaylists(forzarError);
+        if(!respuesta.ok){
+            return respuesta;
+        }
+        if(typeof nombre !=='string' || nombre.trim()===''){
+            return{
+                ok:false,
+                status:400,
+                data:null,
+                error:'Escribe el nombre de la playlist'
+            };
+        }
+        if(!Number.isInteger(usuarioId)||usuarioId<1){
+            return{
+                ok:false,
+                status:400,
+                data:null,
+                error:'El usuario debe tener un identificador válido'
+            };
+        }
+        const playlists=JSON.parse(localStorage.getItem('playlists'));
+        const nuevaPlaylist={
+            id:Math.max(0,...playlists.map(playlist=>playlist.id))+1,
+            nombre:nombre.trim(),
+            usuarioId,
+            cancionIds:[]
+        };
+        playlists.push(nuevaPlaylist);
+        localStorage.setItem('playlists', JSON.stringify(playlists));
+        return{
+            ok:true,
+            status:201,
+            data:nuevaPlaylist,
+            error:null
+        };
+    }catch{
+        return{
+            ok:false,
+            status:500,
+            data:null,
+            error:'No se pudo guardar la playlist'
+        };
+    }
+}
