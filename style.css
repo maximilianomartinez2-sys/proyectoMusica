@@ -176,7 +176,7 @@ body {
     color: white;
     text-align: left;
     cursor: pointer;
-    front-size: 14px;
+    font-size: 14px;
 }
 .Dropdown-menu button:hover{
     background-color: #3e3e3e;

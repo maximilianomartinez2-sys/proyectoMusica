@@ -1,4 +1,5 @@
 import Alpine from 'alpinejs'
+import { obtenerCanciones } from './js/api';
 window.Alpine = Alpine
 Alpine.data('musicApp', () => ({
     canciones: [],
@@ -7,7 +8,7 @@ Alpine.data('musicApp', () => ({
     busqueda: '',
     generoSeleccionado: '',
     criterioOrden: 'titulo',
-    favoritos: JSON.parse(localStorage.getItem('favoritos')) || [],
+    favoritos: JSON.parse(localStorage.getItem('misFavoritos')) || [],
     cancionActual: null,
     indiceActual: 0,
     reproduciendo: false,
@@ -20,9 +21,11 @@ Alpine.data('musicApp', () => ({
     notificacion: {mostrar: false, mensaje: ''},
     async init() {
         try{
-            const respuesta=await fetch('canciones.json');
-            if(!respuesta.ok) throw new Error('Error al cargar las canciones');
-            this.canciones=await respuesta.json();
+            const respuesta=await obtenerCanciones();
+            if(!respuesta.ok){
+                throw new Error(respuesta.error);
+            }
+            this.canciones=respuesta.data;
             if(this.canciones.length>0){
                 this.cancionActual=this.canciones[0];
             }
@@ -36,8 +39,8 @@ Alpine.data('musicApp', () => ({
     get cancionesFiltradas() {
         return this.canciones
             .filter(cancion => {
-                const coincideBusqueda = this.busqueda === '' || canción.titulo.toLowerCase().includes(this.busqueda.toLowerCase());
-                const coincideGenero = this.generoSeleccionado === '' || canción.genero === this.generoSeleccionado;
+                const coincideBusqueda = this.busqueda === '' || cancion.titulo.toLowerCase().includes(this.busqueda.toLowerCase());
+                const coincideGenero = this.generoSeleccionado === '' || cancion.genero === this.generoSeleccionado;
                 return coincideBusqueda && coincideGenero;
             })
             .sort((a, b)=> {
@@ -55,7 +58,7 @@ Alpine.data('musicApp', () => ({
     reproducir(cancion=null){
         if(cancion){
             this.cancionActual=cancion;
-            this.indiceActual=this.canciones.findIndex(cancion => cancion.id === cancion.id);
+            this.indiceActual=this.canciones.findIndex(item => item.id === cancion.id);
             this.segundosTranscurridos=0;
         }else if(!this.cancionActual && this.canciones.length > 0){
             this.cancionActual = this.canciones[0];
@@ -116,7 +119,7 @@ Alpine.data('musicApp', () => ({
     },
     toggleFavorito(cancion){
         if(this.esFavorito(cancion.id)){
-            this.favoritos=this.favoritos.filter(cancion => cancion.id !== cancion.id);
+            this.favoritos=this.favoritos.filter(item => item.id !== cancion.id);
             this.mostrarToast(`Eliminando de favoritos: ${cancion.titulo}`);
         }else{
             this.favoritos.push(cancion);
