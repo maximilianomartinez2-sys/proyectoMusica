@@ -19,9 +19,11 @@ Alpine.data('musicApp', () => ({
     cancionModal: null,
     menuAbiertoID: false,
     notificacion: {mostrar: false, mensaje: ''},
-    async init() {
+    async init(forzarError=false) {
+        this.cargando=true;
+        this.error=null;
         try{
-            const respuesta=await obtenerCanciones();
+            const respuesta=await obtenerCanciones(forzarError);
             if(!respuesta.ok){
                 throw new Error(respuesta.error);
             }
