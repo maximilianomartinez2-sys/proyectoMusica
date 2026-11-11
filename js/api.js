@@ -7,7 +7,7 @@ export async function obtenerCanciones(forzarError=false) {
     if(forzarError){
         throw new Error('Error de prueba');
     }
-    const url=new URL('../canciones.json', import.meta.url);
+    const url=new URL('../mocks/canciones.json', import.meta.url);
     const respuesta=await fetch(url);
     if(!respuesta.ok){
         return{
