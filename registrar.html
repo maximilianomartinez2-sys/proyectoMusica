@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <script type="module" src="app.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
      <link rel="stylesheet" href="style.css" />
@@ -11,14 +12,13 @@
         <a href="index.html" class="Startbutton">Inicio</a>
     </nav>
     <h1>Registrarse</h1>
-    <form action="index.html">
-        <input type="text" placeholder="Ingrese nombre de usuario" required>
-        <br><br>
-        <input type="email" placeholder="Ingrese correo electrónico" required>
-        <br><br>
-        <input type="password" placeholder="Ingrese contraseña" required>
-        <br><br>
-        <button type="submit">Crear cuenta</button>
+    <input type="text" id="nombre" placeholder="Ingres el nombre de usuario" required>
+<br>
+<input type="email" id="correo" placeholder="Ingrese su correo" required>
+<br>
+<input type="password" id="contrasena" placeholder="Ingrese su contrasena" required>
+<br>
+<button type="submit">crear cuenta</button>
     </form>
     <p>¿Ya tienes cuenta?
         <a href="login.html">Inicia sesión aquí</a>
