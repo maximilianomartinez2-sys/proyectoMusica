@@ -178,3 +178,46 @@ export async function editarPlaylist(id, nombre, forzarError = false) {
     };
   }
 }
+export async function eliminarPlaylist(id, forzarError = false) {
+  try {
+    const respuesta = await obtenerPlaylists(forzarError);
+
+    if (!respuesta.ok) {
+      return respuesta;
+    }
+    if (!Number.isInteger(id) || id < 1) {
+      return {
+        ok: false,
+        status: 400,
+        data: null,
+        error: 'El identificador de la playlist es inválido'
+      };
+    }
+    const playlists = JSON.parse(localStorage.getItem('playlists'));
+    const indice = playlists.findIndex(playlist => playlist.id === id);
+    if (indice === -1) {
+      return {
+        ok: false,
+        status: 404,
+        data: null,
+        error: 'No se encontró la playlist'
+      };
+    }
+    const eliminada = playlists[indice];
+    playlists.splice(indice, 1);
+    localStorage.setItem('playlists', JSON.stringify(playlists));
+    return {
+      ok: true,
+      status: 200,
+      data: eliminada,
+      error: null
+    };
+  } catch {
+    return {
+      ok: false,
+      status: 500,
+      data: null,
+      error: 'No se pudo eliminar la playlist'
+    };
+  }
+}
