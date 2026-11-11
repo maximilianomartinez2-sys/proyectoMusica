@@ -10,7 +10,7 @@
 <body class="bg-zinc-900 text-white min-h-screen" x-data="musicApp">
     <header class="Encabezado">
         <div class="SearchBar">
-            <input type="text" id="Search" x-model="busqueda placeholder"="Buscar...">
+            <input type="text" id="Search" x-model="busqueda" placeholder="Buscar...">
         </div>
         <a href="registrar.html" class="ProfileButton">Iniciar sesión</a>
     </header>
@@ -22,8 +22,36 @@
     <main class="ContenedorPrincipal">
     <div class="Musics">
         <h2 class="RecientesTitulo">Agregadas recientemente</h2>
+        <p x-show="cargando" x-cloak role="status" class="text-sm text-zinc-400">
+            Cargando canciones...
+            </p>
+            <p
+            x-show="!cargando && !error && cancionesFiltradas.length===0"
+            x-cloak
+            role="status"
+            class="text-sm text-zinc-400"
+            >
+            No se encontraron canciones.
+        </p>
+        <div
+            x-show="!cargando && error"
+            x-cloak
+            role="alert"
+            class="text-sm text-red-300"
+        >
+            <p x-text="error"></p>
+            <button
+            type="button"
+            @click="init()"
+            class="mt-3 rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+            >
+            Reintentar
+            </button>
+        </div>
         <template x-for="cancion in cancionesFiltradas" :key="cancion.id">
-            <div class="Music flex item-center justify-between p-2 rounded hover:bg-zinc-800/80 transition">
+            <div x-show="!cargando && !error"
+                class="Music flex items-center justify-between p-2 rounded hover:bg-zinc-800/80 transition"
+            >
                 <div class=""flex items-center gap-3>
                     <button class="PlayButton" @click="reproducir(cancion)">
                         <span  x-text="reproduciendo && cancionActual?.id === cancion.id? '❚❚' : '►'"></span>

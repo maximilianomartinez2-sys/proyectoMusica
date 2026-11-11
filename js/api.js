@@ -1,0 +1,85 @@
+export async function obtenerCanciones(forzarError=false) {
+    const latencia=300+Math.floor(Math.random()*501);
+    await new Promise((resolve)=>{
+        setTimeout(resolve, latencia);
+    });
+    try {
+    if(forzarError){
+        throw new Error('Error de prueba');
+    }
+    const url=new URL('../mocks/canciones.json', import.meta.url);
+    const respuesta=await fetch(url);
+    if(!respuesta.ok){
+        return{
+            ok:false,
+            status:respuesta.status,
+            data:null,
+            error:'No se pudo cargar las canciones'
+        };
+    }
+    const canciones=await respuesta.json();
+    return{
+        ok:true,
+        status:200,
+        data:canciones,
+        error:null,
+    };
+} catch {
+    return{
+        ok:false,
+        status:500,
+        data:null,
+        error:'Ocurrió un problema al leer las canciones'
+    };
+}
+}
+export async function obtenerPlaylists(forzarError=false){
+    const latencia=300+Math.floor(Math.random()*501);
+    await new Promise((resolve)=>{
+        setTimeout(resolve, latencia);
+    });
+    try{
+        if(forzarError){
+            throw new Error('Error de prueba');
+        }
+        const guardadas=localStorage.getItem('playlists');
+        if(guardadas!=null){
+        return{
+            ok:true,
+            status:200,
+            data:JSON.parse(guardadas),
+            error:null
+        };
+    }
+        const url=new URL('../mocks/playlists.json', import.meta.url);
+        const respuesta=await fetch(url);
+        if(!respuesta.ok){
+            return{
+                ok:false,
+                status:respuesta.status,
+                data:null,
+                error:'No se pudieron cargar las playlists'
+            };
+        }
+        let playlists=await respuesta.json();
+        const actuales=localStorage.getItem('playlists');
+        if(actuales===null){
+            localStorage.setItem('playlists', JSON.stringify(playlists));
+        }else{
+            playlists=JSON.parse(actuales);
+        }
+        return{
+            ok:true,
+            status:200,
+            data:playlists,
+            error:null
+        };
+    } catch{
+        return{
+            ok:false,
+            status:500,
+            data:null,
+            error:'Ocurrió un problema al leer las playlists'
+        };
+    }
+}
