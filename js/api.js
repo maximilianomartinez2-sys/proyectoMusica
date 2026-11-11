@@ -42,6 +42,15 @@ export async function obtenerPlaylists(forzarError=false){
         if(forzarError){
             throw new Error('Error de prueba');
         }
+        const guardadas=localStorage.getItem('playlists');
+        if(guardadas!=null){
+        return{
+            ok:true,
+            status:200,
+            data:JSON.parse(guardadas),
+            error:null
+        };
+    }
         const url=new URL('../mocks/playlists.json', import.meta.url);
         const respuesta=await fetch(url);
         if(!respuesta.ok){
@@ -52,7 +61,13 @@ export async function obtenerPlaylists(forzarError=false){
                 error:'No se pudieron cargar las playlists'
             };
         }
-        const playlists=await respuesta.json();
+        let playlists=await respuesta.json();
+        const actuales=localStorage.getItem('playlists');
+        if(actuales===null){
+            localStorage.setItem('playlists', JSON.stringify(playlists));
+        }else{
+            playlists=JSON.parse(actuales);
+        }
         return{
             ok:true,
             status:200,
