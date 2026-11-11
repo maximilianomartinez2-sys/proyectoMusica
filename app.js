@@ -185,6 +185,8 @@ if(usuarioEncontrado){
 else{
     alert("no se pudo ingresar");
 }
+
+
 const formRegistro = document.getElementById("formRegistro");
 if(formRegistro){
     formRegistro.addEventListener("submit", function(e){
@@ -205,6 +207,23 @@ else{
     window.location.href= "login.html";
 }
     });
+}
+
+const formLogin = getElementById("formLogin");
+if(formLogin){
+  formLogin.addEventListener("submit", function(e){
+  const correo= document.getElementById("correo").value;
+  const contrasena= document.getElementById("contrasena").value;
+  const usuarios = JSON.parse(localStorage.getItem(UsuariosRegistrados)) || [];
+  const UsuarioValido = usuarios.find(usuarios=> usuario.correo === correo && usuario.contrasena === contrasena);
+  if(UsuarioValido){
+    alert("Bienvenido"+ UsuarioValido.nombre);
+    window.location.href="index.html";
+  }
+  else{
+    alert("correo o contrasena incorrecta");
+  }
+  });
 }
 
 
