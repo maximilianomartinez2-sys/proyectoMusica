@@ -1,49 +1,28 @@
-const llave_usuario = 'musicu_usuarios';
-const actual_llave_usuario = 'musicu_sesion_activa';
-
-const modo_prueba=true;
-let intentos_fallidos=0;
 
 function inicializarUsuarios(){
-    if(!localStorage.getItem(llave_usuario)){
-        const primeros_usuarios=[
-            { id: 1, nombre: "Martin", correo: "martin@gmail.com", contrasena: "martin123" }
-        ];
-        localStorage.setItem(llave_usuario, JSON.stringify(primeros_usuarios));
-    }
+const UsuariosRegistrados = 'musicuUsuarios';
+const SesionActiva = 'musiuSesionActiva';
+if(!localStorage.getItem(UsuariosRegistrados)){
+   const primerUsuario = [{id:1, nombre:"juan", correo:"juan@gmail.com", constrasena:"1234"}];
+   localStorage.setItem(UsuariosRegistrados, JSON.stringify(primerUsuario));
 }
-inicializarUsuarios();
-
-const formulario_registro = document.getElementById("formulario_registro");
-if(formulario_registro){
-    formulario_registro.addEventListener("submit", function(evento) {
-  evento.preventDefault();
-  const nombre = document.getElementById("nombre").value.trim();
-  const correo = document.getElementById("correo").value.trim();
-  const contrasena = document.getElementById("contrasena").value.trim();
-  const mensaje_registro = document.getElementById("mensaje_registro");
-
-  if(!nombre || !correo || !contrasena){
-   mensaje_registro.style.color="red";
-   mensaje_registro.textContent= "Error: Debes llenar todos los campos";
-   return;
-  }
-  // o si no crear lista vacia
-  let usuarios = JSON.parse(localStorage.getItem(llave_usuario)) || [];
-  if(usuarios.some(u => u.correo === correo)){
-    mensaje_registro.style.color="red";
-    mensaje_registro.textContent="Este correo ya ha sido registrado";
-    return;
-  }
-  usuarios.push({ id : Date.now(), nombre, correo, contrasena});
-  localStorage.setItem(llave_usuario, JSON.stringify(usuarios));
-
-
-  mensaje_registro.style.color="green";
-  mensaje_registro.textContent="Se registro con exito, Redirigiendo...";
-  setTimeout(() =>window.location.href = "login.html", 1500);
-    });
-}
+} inicializarUsuarios();
+const formularioRegistro=document.getElementById("formularioRegistro");
+formularioRegistro.addEventListener("submit", function(evento){
+evento.preventDefault();
+const nombreUsuario=document.getElementById("nombre").value;
+const correoUsuario=document.getElementById("correo").value;
+const contrasenaUsuario=document.getElementById("contrasena").value;
+const usuarios = JSON.parse(localStorage.getItem(UsuariosRegistrados)) || [];
+const nuevoUsuario ={
+id: usuarios.length +1,
+nombre: nombreUsuario,
+correo: correoUsuario,
+contrasena: contrasenaUsuario,
+};
+usuarios.push(nuevoUsuario);
+localStorage.setItem(UsuariosRegistrados, JSON.stringify(usuarios));
+});
 
 
 
