@@ -1,3 +1,12 @@
+const usuarioActual = JSON.parse(localStorage.getItem("UsuarioLogueado"));
+if(!usuarioActual && window.location.pathname.includes("index.html")){
+    alert("tienes que iniciar sesion");
+    window.location.href ="login.html";
+}
+
+
+
+
 import Alpine from 'alpinejs'
 import { obtenerCanciones } from './js/api';
 window.Alpine = Alpine
@@ -225,7 +234,11 @@ if(formLogin){
   }
   });
 }
-
+if(UsuarioValido){
+    localStorage.setItem("Usuariologueado", JSON.stringify(UsuarioValido));
+    alert("BIenvenido" + UsuarioValido.nombre);
+    window.location.href="index.html";
+}
 
 
 
