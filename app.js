@@ -157,44 +157,15 @@ Alpine.data('musicApp', () => ({
     }
 }));
 Alpine.start();
-
-function inicializarUsuarios(){
+///////////
 const UsuariosRegistrados = 'musicuUsuarios';
 const SesionActiva = 'musiuSesionActiva';
+function inicializarUsuarios(){
 if(!localStorage.getItem(UsuariosRegistrados)){
-   const primerUsuario = [{id:1, nombre:"juan", correo:"juan@gmail.com", constrasena:"1234"}];
+   const primerUsuario = [{id:1, nombre:"juan", correo:"juan@gmail.com", contrasena:"1234"}];
    localStorage.setItem(UsuariosRegistrados, JSON.stringify(primerUsuario));
 }
 } inicializarUsuarios();
-const formularioRegistro=document.getElementById("formularioRegistro");
-formularioRegistro.addEventListener("submit", function(evento){
-evento.preventDefault();
-const nombreUsuario=document.getElementById("nombre").value;
-const correoUsuario=document.getElementById("correo").value;
-const contrasenaUsuario=document.getElementById("contrasena").value;
-const usuarios = JSON.parse(localStorage.getItem(UsuariosRegistrados)) || [];
-const nuevoUsuario ={
-id: usuarios.length +1,
-nombre: nombreUsuario,
-correo: correoUsuario,
-contrasena: contrasenaUsuario,
-};
-usuarios.push(nuevoUsuario);
-localStorage.setItem(UsuariosRegistrados, JSON.stringify(usuarios));
-});
-
-const correoLogin = document.getElementById("correo").value;
-const contrasenaLogin= document.getElementById("contrasena").value;
-const usuarios = JSON.parse(localStorage.getItem("UsuariosRegistrados")) || []
-const usuarioEncontrado = usuarios.find(usuario=> usuario.correo === correoLogin && usuario.contrasena === contrasenaLogin);
-if(usuarioEncontrado){
-    alert("bienvenido"+usuarioEncontrado.nombre);
-    window.location.href = "reproductor.html";
-}
-else{
-    alert("no se pudo ingresar");
-}
-
 
 const formRegistro = document.getElementById("formRegistro");
 if(formRegistro){
@@ -204,27 +175,28 @@ if(formRegistro){
         const correo= document.getElementById("correo").value;
  const contrasena= document.getElementById("contrasena").value;
  const nuevoUsuario={nombre, correo, contrasena};
-const usuarios=JSON.parse(localStorage.getItem("UsuariosRegistrados")) || [];
+const usuarios=JSON.parse(localStorage.getItem(UsuariosRegistrados)) || [];
 const usuarioEncontrado = usuarios.find(usuario=> usuario.correo === nuevoUsuario.correo)
 if(usuarioEncontrado){
     alert("Ya se ha registrado este correo");
 }
 else{
     usuarios.push(nuevoUsuario);
-    localStorage.setItem("UsuariosRegistrados", JSON.stringify(usuarios));
+    localStorage.setItem(UsuariosRegistrados, JSON.stringify(usuarios));
     alert("Registrado con exito");
     window.location.href= "login.html";
 }
     });
 }
 
-const formLogin = getElementById("formLogin");
+const formLogin = document.getElementById("formLogin");
 if(formLogin){
-  formLogin.addEventListener("submit", function(e){
+   formLogin.addEventListener("submit", function(e){
+    e.preventDefault();
   const correo= document.getElementById("correo").value;
   const contrasena= document.getElementById("contrasena").value;
   const usuarios = JSON.parse(localStorage.getItem(UsuariosRegistrados)) || [];
-  const UsuarioValido = usuarios.find(usuarios=> usuario.correo === correo && usuario.contrasena === contrasena);
+  const UsuarioValido = usuarios.find(usuario=> usuario.correo === correo && usuario.contrasena === contrasena);
   if(UsuarioValido){
     alert("Bienvenido"+ UsuarioValido.nombre);
     window.location.href="index.html";
@@ -233,16 +205,6 @@ if(formLogin){
     alert("correo o contrasena incorrecta");
   }
   });
-}
-if(UsuarioValido){
-    localStorage.setItem("Usuariologueado", JSON.stringify(UsuarioValido));
-    alert("BIenvenido" + UsuarioValido.nombre);
-    window.location.href="index.html";
-}
-
-function cerrarSesion(){
-  localStorage.removeItem("UsuarioLogueado");
-    window.location.href="registrar.html";
 }
 
 
