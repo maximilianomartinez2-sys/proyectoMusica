@@ -283,3 +283,53 @@ export async function agregarCancionAPlaylist(playlistId, cancionId, forzarError
     };
   }
 }
+export async function quitarCancionDePlaylist(playlistId, cancionId, forzarError = false){
+    try{
+        const respuesta = await obtenerPlaylists(forzarError);
+        if (!respuesta.ok){
+            return respuesta;
+        }
+        if(!Number.isInteger(playlistId) || playlistId < 1 ||
+            !Number.isInteger(cancionId) || cancionId < 1){
+            return{
+                ok:false,
+                status:400,
+                data:null,
+                error:'Los identificadores deben ser números enteros positivos'
+            };
+        }
+        const playlists = JSON.parse(localStorage.getItem('playlists'));
+        const playlist = playlists.find(item => item.id === playlistId);
+        if(!playlist){
+            return{
+                ok:false,
+                status:404,
+                data:null,
+                error:'No se encontró la playlist'
+            };
+        }
+        if(!playlist.cancionIds.includes(cancionId)){
+            return{
+                ok:false,
+                status:404,
+                data:null,
+                error:'La canción no está en esta playlist'
+            };
+        }
+        playlist.cancionIds = playlist.cancionIds.filter(id => id !== cancionId);
+        localStorage.setItem('playlists', JSON.stringify(playlists));
+        return{
+            ok:true,
+            status:200,
+            data:playlist,
+            error:null
+        };
+    }catch{
+        return{
+            ok:false,
+            status:500,
+            data:null,
+            error:'No se pudo quitar la canción de la playlist'
+        };
+    }
+}
