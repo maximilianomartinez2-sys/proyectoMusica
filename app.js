@@ -234,6 +234,30 @@ if(usuarioActual && document.getElementById("nombreUsuario")){
 dfafniafnefaif
 */
 
+function inicioSesion(){
+    const correoLogin = document.getElementById("correo").value;
+    const constrasenaLogin= document.getElementById("contrasena").value;
+    const usuarios = JSOn.parse(localStorage.getItem("UsariosRegistrados")) || [];
+    const usuarioValido = usuarios.find(usuario => usuario.correo === correoLogin && usuarioContrasena === contrasenaLogin);
+    if(usuarioValido){
+        localStorage.setItem("UsuarioLogueado", JSON.stringify(usuarioValido));
+        alert("bienvenido"+ usuarioValido.nombre);
+        window.location.href = "index.html";
+    }
+    else{
+        alert("contrasena incorrecta");
+    }
+}
+
+
+
+
+
+
+function cerrarSesion(){
+    localStorage.removeItem(UsuarioLogueado);
+    window.location.href="registrar.html";
+}
 
 
 
