@@ -1,4 +1,4 @@
-const LOGIN_OBLIGATORIO = false;
+const LOGIN_OBLIGATORIO = true;
 const usuarioActual = JSON.parse(localStorage.getItem("Usuariologueado"));
 if(LOGIN_OBLIGATORIO && !usuarioActual && window.location.pathname.includes("index.html")){
     alert("tienes que iniciar sesion");
@@ -199,14 +199,20 @@ if(formLogin){
   const usuarios = JSON.parse(localStorage.getItem(UsuariosRegistrados)) || [];
   const UsuarioValido = usuarios.find(usuario=> usuario.correo === correo && usuario.contrasena === contrasena);
   if(UsuarioValido){
-    alert("Bienvenido"+ UsuarioValido.nombre);
+    localStorage.setItem("Usuariologueado", JSON.stringify(UsuarioValido));
+    alert("Bienvenido "+ UsuarioValido.nombre);
     window.location.href="index.html";
   }
   else{
     alert("correo o contrasena incorrecta");
   }
-  });
+  });  
 }
+window.cerrarSesion = function(){
+    localStorage.removeItem("Usuariologueado");
+    alert("Sesion cerrada");
+    window.location.href="login.html";
+};
 
 
 
