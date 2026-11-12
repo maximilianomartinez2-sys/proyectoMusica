@@ -306,3 +306,43 @@ body {
     text-align: left;
 }
 [x-cloak] { display: none !important; }
+@media (max-width: 768px){
+    .Encabezado{
+        flex-direction: column;
+        gap: 12px;
+    }
+    .SearchBar,
+    .SearchBar input,
+    #Search{
+        width: 100%;
+    }
+    .buttons{
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .buttons a{
+        padding: 8px 18px;
+    }
+    .ContenedorPrincipal{
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+    }
+    .Musics{
+        max-width: 100%;
+        width: 100%;
+    }
+    .PanelDerecho{
+        width: 100%;
+        order: -1;
+    }
+    .PortadaGrande img{
+        width: 100%;
+        max-width: 240px;
+        height: auto;
+        aspect-ratio: 1/1;
+    }
+    .ProgressBarContainer{
+        width: 90%;
+    }
+}
