@@ -1,4 +1,4 @@
-const LOGIN_OBLIGATORIO = true;
+const LOGIN_OBLIGATORIO = false;
 function comprobarAcceso(){
     const pagina = window.location.pathname.split('/').pop() || 'index.html';
     const privadas = ['index.html', 'explorar.html'];
