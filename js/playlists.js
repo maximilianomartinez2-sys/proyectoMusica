@@ -6,7 +6,7 @@ Alpine.data('playlistsApp',()=>({
     canciones:[],
     cargando:true,
     error:null,
-    usuarioId: 1,
+    usuarioId: JSON.parse(localStorage.getItem('Usuariologueado'))?.id ?? null,
     nombreNuevaPlaylist:'',
     editandoId:null,
     nombreEdicion:'',
@@ -103,6 +103,10 @@ Alpine.data('playlistsApp',()=>({
         return playlist.cancionIds.map(id=>this.canciones.find(cancion=>cancion.id===id)).filter(cancion=>cancion!==undefined);
     },
     async init(forzarError=false){
+        if(!Number.isInteger(this.usuarioId) || this.usuarioId<1){
+            window.location.replace('login.html');
+            return;
+        }
         this.cargando=true;
         this.error=null;
         try{
@@ -113,7 +117,7 @@ Alpine.data('playlistsApp',()=>({
             if(!respuestaCanciones.ok){
                 throw new Error(respuestaCanciones.error);
             }
-            this.playlists=respuestaPlaylists.data;
+            this.playlists=respuestaPlaylists.data.filter(playlist=>playlist.usuarioId===this.usuarioId);
             this.canciones=respuestaCanciones.data;
         }catch(error){
             this.error=error.message || 'No se pudieron cargar las playlists';
