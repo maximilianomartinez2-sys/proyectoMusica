@@ -41,10 +41,10 @@
                     </div>
                     <div class="flex flex-col">
                         <label class="text-xs text-zinc-400 mb-1">Ordenar por:</label>
-                        <select x-model="ordenSeleccionado" class="bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-red-500">
+                        <select x-model="criterioOrden" class="bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-red-500">
                             <option value="fecha">Por Defecto</option>
                             <option value="titulo">Título</option>
-                            <option value="duracion">Duración</option>
+                            <option value="artista">Artista</option>
                         </select>
                     </div>    
                 </div>
@@ -64,7 +64,7 @@
                         <div class="flex items-center gap-3">
                             <span class="text-xs text-zinc-400" x-text="cancion.duracionTexto"></span>
                             <button @click="toggleFavorito(cancion)" class="text-xs text-zinc-400 hover:text-red-500">
-                                <span x-text="cancion.favorito ? '❤️' : '🤍'"></span>
+                                <span x-text="esFavorito(cancion.id)?'❤️' : '🤍'"></span>
                             </button>
                             <div class="relative">
                                 <button @click="menuAbiertoID = menuAbiertoID === cancion.id ? null : cancion.id" class="text-xs text-zinc-400 hover:text-zinc-200">
