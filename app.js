@@ -240,6 +240,11 @@ if(UsuarioValido){
     window.location.href="index.html";
 }
 
+function cerrarSesion(){
+  localStorage.removeItem("UsuarioLogueado");
+    window.location.href="registrar.html";
+}
+
 
 
 
