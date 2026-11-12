@@ -54,6 +54,30 @@
         <section x-show="!cargando && !error" x-cloak class="space-y-4">
             <template x-for="playlist in playlists" :key="playlist.id">
                 <article class="rounded-lg bg-zinc-800 p-4">
+                    <button type="button" x-show="editandoId !== playlist.id"
+                        @click="iniciarEdicion(playlist)" :disabled="guardando"
+                        class="mt-3 rounded bg-zinc-700 px-3 py-2">
+                        Editar
+                    </button>
+                    <form x-show="editandoId === playlist.id" x-cloak
+                    @submit.prevent="guardarEdicion()" novalidate class="mt-3 space-y-2">
+                    <label :for="'nombre-edicion-' + playlist.id">Nuevo nombre</label>
+                    <input :id="'nombre-edicion-' + playlist.id" type="text"
+                        x-model="nombreEdicion" :disabled="guardando"
+                        :aria-invalid="errorNombreEdicion !== ''"
+                        :aria-describedby="'error-edicion-' + playlist.id"
+                        class="w-full rounded bg-zinc-900 p-2">
+                    <p :id="'error-edicion-' + playlist.id"
+                        x-show="errorNombreEdicion" x-text="errorNombreEdicion"
+                        role="alert" class="text-red-300"></p>
+                    <button type="submit" :disabled="guardando"
+                        x-text="guardando ? 'Guardando...' : 'Guardar'"
+                         class="rounded bg-red-600 px-3 py-2"></button>
+                    <button type="button" @click="cancelarEdicion()" :disabled="guardando"
+                        class="rounded bg-zinc-700 px-3 py-2">
+                        Cancelar
+                    </button>
+                    </form>
                     <h2 class="text-lg font-semibold" x-text="playlist.nombre"></h2>
                     <p class="text-sm text-zinc-400">
                         <span x-text="playlist.cancionIds.length"></span> canciones
