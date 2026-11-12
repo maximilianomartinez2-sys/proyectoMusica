@@ -1,6 +1,6 @@
 Maximiliano Martinez
 Herramienta utilizada: gemini
-
+conversacion : https://gemini.google.com/app/45fd0d395e6476b9?hl=es
 Preguntas hechas a la IA
 
 1 "¿Debo escribir código en app.js o en perfil.html?"
@@ -111,3 +111,7 @@ especificar el nombre remoto ni la rama completa, bastando con escribir simpleme
 
 Respuesta: Porque los scripts marcados como módulos se cargan y ejecutan de forma diferida (deferred) por defecto. Esto provoca que el archivo de JavaScript intente ejecutarse
 antes de que el árbol del DOM (el contenido HTML) termine de renderizarse por completo en la memoria del navegador, requiriendo validaciones de nulidad o eventos de carga como DOMContentLoaded.
+
+
+CONCLUSION
+La IA me ayudo a entender conceptos que no acababa de dominar, y me ayudo a corroborar si lo que estaba haciendo tenia logica.
