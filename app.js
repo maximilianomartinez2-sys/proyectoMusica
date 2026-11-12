@@ -1,13 +1,15 @@
 const LOGIN_OBLIGATORIO = true;
-const usuarioActual = JSON.parse(localStorage.getItem("Usuariologueado"));
-if(LOGIN_OBLIGATORIO && !usuarioActual && window.location.pathname.includes("index.html")){
-    alert("tienes que iniciar sesion");
-    window.location.href ="login.html";
+function comprobarAcceso(){
+    const pagina = window.location.pathname.split('/').pop() || 'index.html';
+    const privadas = ['index.html', 'explorar.html'];
+    const usuario = JSON.parse(localStorage.getItem('Usuariologueado'));
+    if (LOGIN_OBLIGATORIO && privadas.includes(pagina) &&
+        (!Number.isInteger(usuario?.id) || usuario.id<1)) {
+        window.location.replace('login.html');
+    }
 }
-
-
-
-
+comprobarAcceso();
+window.addEventListener('pageshow', comprobarAcceso);
 import Alpine from 'alpinejs'
 import { obtenerCanciones } from './js/api';
 window.Alpine = Alpine
@@ -175,8 +177,13 @@ if(formRegistro){
        const nombre= document.getElementById("nombre").value;
         const correo= document.getElementById("correo").value;
  const contrasena= document.getElementById("contrasena").value;
- const nuevoUsuario={nombre, correo, contrasena};
-const usuarios=JSON.parse(localStorage.getItem(UsuariosRegistrados)) || [];
+ const usuarios=JSON.parse(localStorage.getItem(UsuariosRegistrados)) || [];
+ const nuevoUsuario={
+    id:Math.max(0, ...usuarios.map(usuario=>usuario.id || 0))+1,
+    nombre,
+    correo,
+    contrasena
+ };
 const usuarioEncontrado = usuarios.find(usuario=> usuario.correo === nuevoUsuario.correo)
 if(usuarioEncontrado){
     alert("Ya se ha registrado este correo");
