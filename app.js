@@ -1,5 +1,6 @@
-const usuarioActual = JSON.parse(localStorage.getItem("UsuarioLogueado"));
-if(!usuarioActual && window.location.pathname.includes("index.html")){
+const LOGIN_OBLIGATORIO = false;
+const usuarioActual = JSON.parse(localStorage.getItem("Usuariologueado"));
+if(LOGIN_OBLIGATORIO && !usuarioActual && window.location.pathname.includes("index.html")){
     alert("tienes que iniciar sesion");
     window.location.href ="login.html";
 }
