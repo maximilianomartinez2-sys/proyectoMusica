@@ -66,7 +66,48 @@ Respuesta: Se evaluó el flujo completo de una aplicación web: el Registro alma
 y genera una sesión activa (UsuarioLogueado), y el Perfil consume esa sesión para personalizar la interfaz.
 
 12 Pregunta: "¿Qué pasos lógicos debe seguir JavaScript al cargar la página de perfil?"
+Respuesta: Se estableció la secuencia algorítmica: leer el objeto almacenado en el navegador, seleccionarlo mediante su identificador único en el DOM (document.getElementById),
+y modificar sus propiedades de texto (textContent) para renderizar la información del usuario autenticado.
 
-Respuesta: Se estableció la secuencia algorítmica: leer el objeto almacenado en el navegador, seleccionarlo mediante su identificador único en el DOM 
-(document.getElementById), y modificar sus propiedades de texto (textContent) para renderizar la información del usuario autenticado.
+13 Pregunta: ¿Por qué es estrictamente necesario utilizar JSON.stringify() antes de guardar un arreglo u objeto en el localStorage?
 
+Respuesta: Porque el almacenamiento local del navegador (localStorage) solo permite almacenar cadenas de texto (strings). JSON.stringify()
+convierte estructuras de datos complejas de JavaScript en formato de texto plano para que puedan ser guardadas correctamente sin perder su formato estructural.
+
+14 Métodos de Arreglos en JavaScript
+Pregunta: ¿Cuál es la diferencia fundamental entre utilizar el método .find() frente al método .filter() al momento de buscar un usuario por su correo?
+
+Respuesta: El método .find() busca y devuelve únicamente el primer elemento que cumple con la condición booleana y detiene la búsqueda de inmediato. 
+En cambio, .filter() recorre todo el arreglo de principio a fin y devuelve un nuevo arreglo con todas las coincidencias encontradas.
+Para el login, .find() es ideal porque un correo es único
+
+15 Pregunta: ¿Por qué es obligatorio incluir e.preventDefault() dentro de la función manejadora del evento submit en un formulario?
+
+Respuesta: Porque por defecto los formularios HTML recargan la página completa al presionar un botón de envío (submit), lo que borraría cualquier estado o variable en memoria. e.preventDefault()
+intercepta y anula ese comportamiento predeterminado del navegador, permitiendo que la lógica en JavaScript procese los datos de forma local y asíncrona.
+
+
+16 Pregunta: ¿Qué diferencia técnica existe entre modificar una etiqueta con .textContent en comparación con .innerHTML?
+
+Respuesta: .textContent interpreta y asigna estrictamente texto plano, lo cual es seguro y eficiente para mostrar datos de usuarios.
+Por el contrario, .innerHTML analiza la cadena como código HTML, lo que permite insertar etiquetas de forma dinámica pero introduce
+graves vulnerabilidades de seguridad (como ataques XSS) si se manipulan datos ingresados directamente por usuarios sin depurar.
+
+17 Pregunta: ¿Por qué en el diseño del sistema se separaron dos llaves independientes en el localStorage: "UsuariosRegistrados" y "UsuarioLogueado"?
+
+Respuesta: Porque cumplen roles lógicos completamente diferentes en la arquitectura de la aplicación:
+
+"UsuariosRegistrados" funciona como una base de datos acumulativa que almacena el histórico de todas las cuentas creadas.
+
+"UsuarioLogueado" actúa como una variable de estado de sesión transitoria, registrando exclusivamente qué usuario específico
+tiene privilegios activos en la plataforma en ese momento.
+
+18 Pregunta: ¿Qué utilidad práctica tiene el parámetro -u (upstream) al ejecutar git push -u origin cambiosMax por primera vez?
+
+Respuesta: Configura un vínculo de seguimiento permanente (tracking) entre la rama local actual (cambiosMax) y la rama remota en el servidor de GitHub. Gracias a esto, en los siguientes envíos de código ya no es necesario
+especificar el nombre remoto ni la rama completa, bastando con escribir simplemente git push
+
+19 Pregunta: ¿Por qué al usar la directiva type="module" en un <script> el navegador puede generar errores si se intenta buscar un elemento del DOM inmediatamente al cargar el archivo?
+
+Respuesta: Porque los scripts marcados como módulos se cargan y ejecutan de forma diferida (deferred) por defecto. Esto provoca que el archivo de JavaScript intente ejecutarse
+antes de que el árbol del DOM (el contenido HTML) termine de renderizarse por completo en la memoria del navegador, requiriendo validaciones de nulidad o eventos de carga como DOMContentLoaded.
