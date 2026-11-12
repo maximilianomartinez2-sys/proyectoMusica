@@ -305,6 +305,22 @@ body {
     gap: 15px;
     text-align: left;
 }
+#formRegistro{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+#formRegistro button:hover{
+    background-color: darkred;
+}
+#formRegistro button:disabled{
+    background-color: grey;
+    cursor: not-allowed;
+}
+#mensajeRegistro{
+    margin-top: 15px;
+}
 [x-cloak] { display: none !important; }
 @media (max-width: 768px){
     .Encabezado{
