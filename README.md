@@ -22,7 +22,7 @@ Requisitos: Node.js, npm y Git.
 git clone https://github.com/maximilianomartinez2-sys/proyectoMusica.git
 cd proyectoMusica
 npm install
-npx vite
+npm run dev
 ```
 
 Abrir la dirección `Local` que muestra Vite en la terminal.
@@ -44,7 +44,7 @@ Las modificaciones de playlists se guardan en localStorage, bajo la clave `playl
 - Correo: `martin@gmail.com`
 - Contraseña: `martin123`
 
-La conexión de estos datos con el flujo de autenticación está pendiente de integración. Actualmente, la vista de playlists utiliza el usuario de prueba con ID `1`.
+La conexión de estos datos con el flujo de autenticación está pendiente de integración. La vista de playlists utiliza el ID de la sesión y muestra únicamente las playlists de ese usuario.
 
 ## API simulada
 
@@ -102,4 +102,7 @@ Implementado y probado:
 Pendiente de integración:
 - Controles para eliminar playlists y agregar o quitar canciones.
 - Consulta de usuarios mediante la API.
-- Asociación de las playlists con el usuario de la sesión.
+
+## Uso de IA 
+
+Ver la carpeta[IA/](IA/).
