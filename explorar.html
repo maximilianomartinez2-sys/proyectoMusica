@@ -7,49 +7,107 @@
         <title>Explorar</title>
         <link rel="stylesheet" href="style.css" />
     </head>
-    <body>
-        <header>
-            <div class="Encabezado">
-                <form class="SearchBar">
-                    <input type="text" name="Search" id="Search" placeholder="Buscar...">
-                </form>
-                <button class="ProfileButton">Mi Perfil</button>
+    <body class=" bg-zinc-900 text white min-h-screen" x-data="musicApp" x-cloak>
+        <header class="Encabezado">
+            <div class="SearchBar">
+                <input type= "text" id="Search" x-model="busqueda" placeholder="Buscar...">
             </div>
-            <nav class="buttons">
-                <a class="Startbutton" href="index.html">Inicio</a>
-                <a class="Explorebutton" href="explorar.html">Explorar</a>
-                <a class="Playlistbutton" href="playlist.html">Playlist</a>
-            </nav>
+            <a href="registrar.html" class="ProfileButton">Iniciar sesión</a>    
         </header>
-        <main>
-            <section class="welcome-header">
-                <h1>Explorar Categorías</h1>
-            </section>
-            <section class="categories-grid">
-                <article class="category-card">
-                    <h3>Rock</h3>
-                </article>
-                <article class="category-card">
-                    <h3>Pop</h3>
-                </article>
-                <article class="category-card">
-                    <h3>Hip-Hop</h3>
-                </article>
-            </section>
+        <nav class="buttons">
+            <a class="Startbutton" href="index.html">Inicio</a>
+            <a class="Explorebutton" href="explorar.html">Explorar</a>
+            <a class="Playlistbutton" href="playlist.html">Playlist</a>
+    </nav>
+        <main class="ContenedorPrincipal max-w-6xl mx-auto p-4">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6 bg-zinc-800/60 p-4 rounded-xl border border-zinc-700/50">
+                <div>
+                    <h1 class="text 2x1 font-bold text-white">Explorar Catálogo</h1>
+                    <p class="text-xs text-zinc-400">Encuentra tus canciones por género u orden</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="flex flex-col">
+                        <label class="text-xs text-zinc-400 mb-1">Género:</label>
+                        <select x-model="generoSeleccionado" class="bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-red-500">
+                            <option value="Todos">Todos los géneros</option>
+                            <option value="Rock">Rock</option>
+                            <option value="Pop">Pop</option>
+                            <option value="Trap">Trap</option>
+                            <option value="Hip-Hop">Hip-Hop</option>
+                            <option value="Indie">Indie</option>
+                            <option value="Funk">Funk</option>
+                            <option value="Bolero">Bolero</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-xs text-zinc-400 mb-1">Ordenar por:</label>
+                        <select x-model="ordenSeleccionado" class="bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-red-500">
+                            <option value="fecha">Por Defecto</option>
+                            <option value="titulo">Título</option>
+                            <option value="duracion">Duración</option>
+                        </select>
+                    </div>    
+                </div>
+            </div>
+            <div class="Musics space-y-3">
+                <template x-for="cancion in cancionesFiltradas" :key="cancion.id">
+                    <div class="Music flex items-center justify-between p-2 rounded hover:bg-zinc-800/80 transition">
+                        <div class="flex items-center gap-4">
+                            <button class="PlayButton" @click="reproducir(cancion)">
+                                <span x-text="reproduciendo && cancionActual?.id === cancion.id ? '❚❚' : '►'"></span>
+                            </button>
+                            <div>
+                                <h4 class="font-semibold text-white text-sm" x-text="cancion.titulo"></h4>
+                                <p class="text-xs text-zinc-400" x-text="`${cancion.artista} - ${cancion.genero}`"></p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs text-zinc-400" x-text="cancion.duracionTexto"></span>
+                            <button @click="toggleFavorito(cancion)" class="text-xs text-zinc-400 hover:text-red-500">
+                                <span x-text="cancion.favorito ? '❤️' : '🤍'"></span>
+                            </button>
+                            <div class="relative">
+                                <button @click="menuAbiertoID = menuAbiertoID === cancion.id ? null : cancion.id" class="text-xs text-zinc-400 hover:text-zinc-200">
+                                    •••
+                                </button>
+                                <div x-show="menuAbiertoID===cancion.id" @click.outside="menuAbiertoID=null" x-transition class="absolute right-0 mt-2 w-44 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl z-20 py-1 text-sm">
+                                    <button @click="agregarACola(cancion)" class="w-full text-left px-4 py-2 hover:bg-zinc-700">Agregar a la cola</button>
+                                    <button @click="verDetalle(cancion)" class="w-full text-left px-4 py-2 hover:bg-zinc-700">Ver detalles</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <div x-show="cancionesFiltradas.length ===0" class="text-center py-10 text-zinc-500">
+                    <p class ="text-sm">No se encontraron canciones.</p>
+                </div>
+            </div>    
+
         </main>
         <footer class="PlayerControls">
             <div class="ControlButtons">
-                <button class="ControlButton BtnPrev">&#x23EE</button>
-                <button class="ControlButton PlayMain">&#9658</button>
-                <button class="ControlButton BtnNext">&#x23ED</button>
+                <button class="ControlButton BtnPrev" @click="anterior()">&#x23EE</button>
+                <button class="ControlButton PlayMain" @click="togglePlay()">
+                    <span x-text="reproduciendo ? '❚❚' : '►'"></span>
+                </button>
+                <button class="ControlButton BtnNext" @click="siguiente()">&#x23ED</button>
             </div>
             <div class="ProgressBarContainer">
                 <div class="MusicBar">
-                    <div class="MusicBarProgress"></div>
+                    <div class="MusicBarProgress" :style="`width: ${porcentajeProgreso}%`"></div>
                 </div>
-                <span class="MusicTime">0:00</span>
+                <span class="MusicTime" x-text="`${tiempoFormateadoActual} / ${cancionActual ? cancionActual.duracionTexto : '0:00'}`"></span>
             </div>    
         </footer>
-        <script src="app.js" defer></script>
+        <div x show="notificacion.mostrar" x-transition class="fixed bottom-20 right-6 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg font-medium text-sm z-50" x-text="notificacion.mensaje"></div>
+        <div x-show="modalDetalle" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" x-transition>
+            <div class="bg-zinc-800 border border-zinc-700 p-6 rounded-xl max-w-sm w-full relative" @click.outside="modalDetalle = false">
+                <h3 class="text-xl font-bold text-white mb-2" x-text="cancionModal?.titulo"></h3>
+                <p class="text-sm text-zinc-300 mb-1"><strong>Artista:</strong><span x-text="cancionModal?.artista"></span></p> 
+                <p class="text-sm text-zinc-300 mb-1"><strong>Género:</strong><span x-text="cancionModal?.genero"></span></p> 
+                <p class="text-sm text-zinc-300 mb-1"><strong>Duración:</strong><span x-text="cancionModal?.duracionTexto"></span></p>
+                <button @click="modalDetalle = false" class="mt-6 bg-zinc-700 hover:bg-zinc-600 text-white font-medium px-4 py-2 rounded-lg text-sm w-full">Cerrar</button>
+            </div>             
+        </div>
     </body>
 </html>
