@@ -221,3 +221,65 @@ export async function eliminarPlaylist(id, forzarError = false) {
     };
   }
 }
+export async function agregarCancionAPlaylist(playlistId, cancionId, forzarError = false){
+  try{
+    const[respuestaPlaylists, respuestaCanciones]= await Promise.all([
+      obtenerPlaylists(forzarError),
+      obtenerCanciones()
+    ]);
+    if(!respuestaPlaylists.ok){
+      return respuestaPlaylists;
+    }
+
+    if(!respuestaCanciones.ok){
+      return respuestaCanciones;
+    }
+    if(
+      !Number.isInteger(playlistId) || playlistId < 1 ||
+      !Number.isInteger(cancionId) || cancionId < 1
+    ) {
+      return{
+        ok: false,
+        status: 400,
+        data: null,
+        error: 'Los identificadores deben ser números enteros positivos'
+      };
+    }
+    const playlists = JSON.parse(localStorage.getItem('playlists'));
+    const playlist = playlists.find(item => item.id === playlistId);
+    if(!playlist){
+      return{
+        ok: false,
+        status: 404,
+        data: null,
+        error: 'No se encontró la playlist'
+      };
+    }
+    const existeCancion = respuestaCanciones.data.some(cancion => cancion.id === cancionId);
+    if(!existeCancion){
+      return{
+        ok: false,
+        status: 404,
+        data: null,
+        error: 'No se encontró la canción'
+      };
+    }
+    if(!playlist.cancionIds.includes(cancionId)){
+      playlist.cancionIds.push(cancionId);
+    }
+    localStorage.setItem('playlists', JSON.stringify(playlists));
+    return{
+      ok: true,
+      status: 200,
+      data: playlist,
+      error: null
+    };
+    }catch{
+    return{
+      ok: false,
+      status: 500,
+      data: null,
+      error: 'No se pudo agregar la canción a la playlist'
+    };
+  }
+}
