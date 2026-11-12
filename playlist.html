@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <script type="module" src="app.js"></script>
+    <script type="module" src="js/playlists.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Playlist</title>
     <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body x-data="playlistsApp">
     <header>
         <div class="Encabezado">
             <form class="SearchBar">
@@ -21,37 +21,37 @@
             <a class="Playlistbutton" href="playlist.html">Playlist</a>
         </nav>
     </header>
-    <main>
-        <section class="playlist-header">
-            <h1>Mis playlist</h1>
-            <p>3 canciones - 9min 40 segs</p>
-        </section>
-        <section class="Musics">
-            <article class="Music">
-                <button class="PlayButton">&#9658</button>
-                <div class="MusicIcon"></div>
-                <div class="MusicBar"></div>
-                <span class="MusicTime">3:38</span>    
-            </article>
-            <article class="Music">
-                <button class="PlayButton">&#9658</button>
-                <div class="MusicIcon"></div>
-                <div class="MusicBar"></div>
-                <span class="MusicTime">4:05</span>
-            </article>
-            <article class="Music">
-                <button class="PlayButton">&#9658</button>
-                <div class="MusicIcon"></div>
-                <div class="MusicBar"></div>
-                <span class="MusicTime">1:57</span>
-            </article>
+    <main class="mx-auto max-w-4xl px-4 py-8 pb-36">
+        <h1 class="mb-6 text-2xl font-bold">Mis playlists</h1>
+        <p x-show="cargando" x-cloak role="status">
+            Cargando playlists...
+        </p>
+        <div x-show="!cargando && error" x-cloak role="alert">
+        <p class="text-red-300" x-text="error"></p>
+        <button type="button" @click="init()" class="mt-3 rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700">
+            Reintentar
+        </button>
+        </div>
+        <p x-show="!cargando && !error && playlists.length===0" x-cloak role="status">
+            Todavía no tienes playlists.
+        </p>
+        <section x-show="!cargando && !error" x-cloak class="space-y-4">
+            <template x-for="playlist in playlists" :key="playlist.id">
+                <article class="rounded-lg bg-zinc-800 p-4">
+                    <h2 class="text-lg font-semibold" x-text="playlist.nombre"></h2>
+                    <p class="text-sm text-zinc-400">
+                        <span x-text="playlist.cancionIds.length"></span>
+                        canciones
+                    </p>
+                </article>
+            </template>
         </section>
     </main>
     <footer class="PlayerControls">
             <div class="ControlButtons">
-                <button class="ControlButton BtnPrev">&#x23EE</button>
-                <button class="ControlButton PlayMain">&#9658</button>
-                <button class="ControlButton BtnNext">&#x23ED</button>
+                <button class="ControlButton BtnPrev">&#x23EE;</button>
+                <button class="ControlButton PlayMain">&#9658;</button>
+                <button class="ControlButton BtnNext">&#x23ED;</button>
             </div>
             <div class="ProgressBarContainer">
                 <div class="MusicBar">
@@ -60,6 +60,5 @@
                 <span class="MusicTime">0:00</span>
             </div>    
         </footer>
-        <script src="app.js" defer></script>
 </body>
 </html>
