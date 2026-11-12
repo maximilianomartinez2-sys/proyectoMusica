@@ -29,7 +29,7 @@
                     <div class="flex flex-col">
                         <label class="text-xs text-zinc-400 mb-1">Género:</label>
                         <select x-model="generoSeleccionado" class="bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-red-500">
-                            <option value="Todos">Todos los géneros</option>
+                            <option value="">Todos los géneros</option>
                             <option value="Rock">Rock</option>
                             <option value="Pop">Pop</option>
                             <option value="Trap">Trap</option>
@@ -99,7 +99,7 @@
                 <span class="MusicTime" x-text="`${tiempoFormateadoActual} / ${cancionActual ? cancionActual.duracionTexto : '0:00'}`"></span>
             </div>    
         </footer>
-        <div x show="notificacion.mostrar" x-transition class="fixed bottom-20 right-6 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg font-medium text-sm z-50" x-text="notificacion.mensaje"></div>
+        <div x-show="notificacion.mostrar" x-transition class="fixed bottom-20 right-6 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg font-medium text-sm z-50" x-text="notificacion.mensaje"></div>
         <div x-show="modalDetalle" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" x-transition>
             <div class="bg-zinc-800 border border-zinc-700 p-6 rounded-xl max-w-sm w-full relative" @click.outside="modalDetalle = false">
                 <h3 class="text-xl font-bold text-white mb-2" x-text="cancionModal?.titulo"></h3>
