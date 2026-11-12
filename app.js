@@ -207,6 +207,32 @@ if(formLogin){
   });
 }
 
+const formLogin = document.getElementById("formLogin");
+if(formLogin){
+    formLogin.addEventListener("submit", function(e){
+        e.preventDefault();
+      const correo = document.getElementById("correo").value;
+      const constrasena = document.getElementById("contrasena").value;
+      const usuarios = JSON.parse(localStorage.getItem("UsuariosRegistrados")) || [];
+      const UsuarioValido = usuarios.find(usario=>usuario.correo === correo && usuario.contrasena === contrasena);
+      if(UsuarioValido){
+        alert("Bienvenido "+ UsuarioValido.nombre);
+        localStorage.setItem("UsuarioLogueado", JSON.stringify(UsuarioValido));
+        window.location.href="perfil.html";
+      }
+      else{
+        alert("contrasena o correo equivocados");
+      }
+    });
+}
+const usuarioActual = JSON.parse(localStorage.getItem("UsuarioLogueado"));
+if(usuarioActual && document.getElementById("nombreUsuario")){
+    document.getElementById("nombreUsuario").textContent = usuarioActual.nombre;
+    document.getElementById("correoUsuario").textContent = usuarioActual.correo;
+}
+/*
+dfafniafnefaif
+*/
 
 
 
