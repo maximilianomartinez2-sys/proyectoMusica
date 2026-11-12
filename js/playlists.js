@@ -6,6 +6,9 @@ Alpine.data('playlistsApp',()=>({
     canciones:[],
     cargando:true,
     error:null,
+    cancionesDePlaylists(playlist){
+        return playlist.cancionIds.map(id=>this.canciones.find(cancion=>cancion.id===id)).filter(cancion=>cancion!==undefined);
+    },
     async init(forzarError=false){
         this.cargando=true;
         this.error=null;
