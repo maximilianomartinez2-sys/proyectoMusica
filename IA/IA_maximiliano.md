@@ -112,6 +112,25 @@ especificar el nombre remoto ni la rama completa, bastando con escribir simpleme
 Respuesta: Porque los scripts marcados como módulos se cargan y ejecutan de forma diferida (deferred) por defecto. Esto provoca que el archivo de JavaScript intente ejecutarse
 antes de que el árbol del DOM (el contenido HTML) termine de renderizarse por completo en la memoria del navegador, requiriendo validaciones de nulidad o eventos de carga como DOMContentLoaded.
 
+si quiero que al presionar "crear cuenta" me dirija al index.html que debo poner?
+gemini:Para conectar tu formulario de registro con index.html utilizando el archivo app.js (y aprovechando que usas Alpine.js y almacenamiento local en tu proyecto MusicU), lo mejor es manejarlo con JavaScript mediante un evento submit. Así evitamos que la página se recargue de forma brusca y guardamos los datos del usuario en localStorage para que quede la sesión iniciada.
+
+Aquí tienes cómo debes estructurar ambas partes:
+
+1. Modificar tu formulario en registrar.html
+Asegúrate de que tus inputs tengan sus atributos id bien definidos (como ya los tenías) para poder capturarlos desde app.js:
+
+HTML
+<form id="formRegistro">
+    <input type="text" id="nombre" placeholder="Ingrese el nombre de usuario" required>
+    <br><br>
+    <input type="email" id="correo" placeholder="Ingrese su correo" required>
+    <br><br>
+    <input type="password" id="contrasena" placeholder="Ingrese su contraseña" required>
+    <br><br>
+    <button type="submit">Crear cuenta</button>
+</form>
+
 
 CONCLUSION
 La IA me ayudo a entender conceptos que no acababa de dominar, y me ayudo a corroborar si lo que estaba haciendo tenia logica.
