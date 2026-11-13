@@ -40,9 +40,9 @@ Las modificaciones de playlists se guardan en localStorage, bajo la clave `playl
 ## Usuario de prueba del mock
 
 - ID: `1`
-- Nombre: `Martin`
-- Correo: `martin@gmail.com`
-- Contraseña: `martin123`
+- Nombre: `Juan`
+- Correo: `juan@gmail.com`
+- Contraseña: `1234`
 
 La conexión de estos datos con el flujo de autenticación está pendiente de integración. La vista de playlists utiliza el ID de la sesión y muestra únicamente las playlists de ese usuario.
 
